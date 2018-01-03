@@ -34,18 +34,23 @@ public class EmailParser {
     private EmailDescriptor parseEmailFrom(BufferedReader bf) throws Exception {
         Map<String, String> emailFields = new HashMap<>();
 
-        for (String nextLine = bf.readLine(); nextLine != null; bf.readLine()) {
+        for (String nextLine = bf.readLine(); nextLine != null; nextLine = bf.readLine()) {
             String[] fieldTokens = nextLine.split(":");
             String field = fieldTokens[0].trim().toLowerCase();
-            String value = fieldTokens[1].trim().toLowerCase();
-            emailFields.put(field, value);
+
+            try {
+                String value = fieldTokens[1].trim().toLowerCase();
+                emailFields.put(field, value);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                emailFields.put(field, "");
+            }
 
             if (field.equals("body")) {
                 break;
             }
         }
 
-        for (String nextLine = bf.readLine(); nextLine != null; bf.readLine()) {
+        for (String nextLine = bf.readLine(); nextLine != null; nextLine = bf.readLine()) {
             emailFields.put("body", emailFields.get("body") + "\n" + nextLine);
         }
 
@@ -56,16 +61,16 @@ public class EmailParser {
 
         Email email = new Email()
                 .from(emailFields.get("user"))
-                .to(getCommaSeperatedValues(emailFields, "to"))
-                .cc(getCommaSeperatedValues(emailFields, "cc"))
-                .bcc(getCommaSeperatedValues(emailFields, "bcc"))
+                .to(getCommaSeparatedValues(emailFields, "to"))
+                .cc(getCommaSeparatedValues(emailFields, "cc"))
+                .bcc(getCommaSeparatedValues(emailFields, "bcc"))
                 .subject(emailFields.get("subject"))
                 .body(emailFields.get("body"));
 
         return new EmailDescriptor(emailCredentials, email);
     }
 
-    private String[] getCommaSeperatedValues(Map<String, String> emailFields, String field) {
+    private String[] getCommaSeparatedValues(Map<String, String> emailFields, String field) {
         String[] splitValues = emailFields.get(field.toLowerCase()).split(",");
         String[] trimmedSplitValues = new String[splitValues.length];
 

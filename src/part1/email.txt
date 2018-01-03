@@ -1,0 +1,8 @@
+Server: mail.gmail.com
+User: gflight92@gmailc.om
+Password: wapo
+To: jessicaa@ualberta.ca
+CC:
+BCC:
+Subject: Testing as4
+Body: If you are reading this I am 1/3 done my last assignment
