@@ -1,7 +1,7 @@
-Server: mail.gmail.com
-User: gflight92@gmailc.om
-Password: wapo
-To: jessicaa@ualberta.ca
+Server: smtp.gmail.com
+User: gaflight95@gmail.com
+Password: none
+To: jessicaa@ualberta.ca, gflight92@gmail.com
 CC:
 BCC:
 Subject: Testing as4

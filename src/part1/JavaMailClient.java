@@ -22,6 +22,8 @@ public class JavaMailClient implements IEmailClient {
         Properties sessionProperties = new Properties();
         sessionProperties.put("mail.smtp.host", emailCredentials.getMailServer());
         sessionProperties.put("mail.smtp.auth", "true");
+        sessionProperties.put("mail.smtp.port", "587");
+        sessionProperties.put("mail.smtp.starttls.enable", "true");
         return sessionProperties;
     }
 

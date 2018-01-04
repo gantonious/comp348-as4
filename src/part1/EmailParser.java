@@ -39,7 +39,7 @@ public class EmailParser {
             String field = fieldTokens[0].trim().toLowerCase();
 
             try {
-                String value = fieldTokens[1].trim().toLowerCase();
+                String value = fieldTokens[1].trim();
                 emailFields.put(field, value);
             } catch (ArrayIndexOutOfBoundsException e) {
                 emailFields.put(field, "");
@@ -71,13 +71,16 @@ public class EmailParser {
     }
 
     private String[] getCommaSeparatedValues(Map<String, String> emailFields, String field) {
-        String[] splitValues = emailFields.get(field.toLowerCase()).split(",");
-        String[] trimmedSplitValues = new String[splitValues.length];
+        if (emailFields.get(field.toLowerCase()).contains(",")) {
+            String[] splitValues = emailFields.get(field.toLowerCase()).split(",");
+            String[] trimmedSplitValues = new String[splitValues.length];
 
-        for (int i = 0; i < trimmedSplitValues.length; i++) {
-            trimmedSplitValues[i] = splitValues[i].trim();
+            for (int i = 0; i < trimmedSplitValues.length; i++) {
+                trimmedSplitValues[i] = splitValues[i].trim();
+            }
+
+            return trimmedSplitValues;
         }
-
-        return trimmedSplitValues;
+        return new String[0];
     }
 }
