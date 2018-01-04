@@ -1,9 +1,7 @@
 package part1;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,11 +14,13 @@ public class Email {
     private List<String> toAddresses;
     private List<String> ccAddresses;
     private List<String> bccAddresses;
+    private List<String> attachments;
 
     public Email() {
         toAddresses = new ArrayList<>();
         ccAddresses = new ArrayList<>();
         bccAddresses = new ArrayList<>();
+        attachments = new ArrayList<>();
     }
 
     public Email from(String address) {
@@ -53,7 +53,8 @@ public class Email {
         return this;
     }
 
-    public Email attach(File file) {
+    public Email attach(String fileName) {
+        attachments.add(fileName);
         return this;
     }
 
@@ -79,6 +80,10 @@ public class Email {
 
     public List<String> getBccAddresses() {
         return bccAddresses;
+    }
+
+    public List<String> getAttachments() {
+        return attachments;
     }
 
     public void sendUsing(IEmailClient emailClient) {
