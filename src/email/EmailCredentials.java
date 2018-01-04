@@ -1,4 +1,4 @@
-package part1;
+package email;
 
 /**
  * Created by George on 2018-01-03.

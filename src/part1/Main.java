@@ -1,5 +1,8 @@
 package part1;
 
+import email.IEmailSender;
+import email.JavaMailSender;
+
 /**
  * Created by George on 2018-01-01.
  */
@@ -20,8 +23,8 @@ public class Main {
         String emailDescriptorFileName = getEmailDescriptorFileNameFrom(args);
         EmailDescriptor emailDescriptor = emailParser.parseEmailFrom(emailDescriptorFileName);
 
-        IEmailClient emailClient = new JavaMailClient(emailDescriptor.getEmailCredentials());
-        emailDescriptor.getEmail().sendUsing(emailClient);
+        IEmailSender emailSender = new JavaMailSender(emailDescriptor.getEmailCredentials());
+        emailDescriptor.getEmail().sendUsing(emailSender);
     }
 
     private static String getEmailDescriptorFileNameFrom(String[] args) {

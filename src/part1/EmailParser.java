@@ -1,5 +1,8 @@
 package part1;
 
+import email.Email;
+import email.EmailCredentials;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;

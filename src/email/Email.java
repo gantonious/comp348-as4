@@ -1,4 +1,4 @@
-package part1;
+package email;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,7 +86,7 @@ public class Email {
         return attachments;
     }
 
-    public void sendUsing(IEmailClient emailClient) {
-        emailClient.send(this);
+    public void sendUsing(IEmailSender emailSender) {
+        emailSender.send(this);
     }
 }

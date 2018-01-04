@@ -1,4 +1,8 @@
-package part1;
+package email;
+
+import email.Email;
+import email.EmailCredentials;
+import email.IEmailSender;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -13,10 +17,10 @@ import java.util.Properties;
 /**
  * Created by George on 2018-01-03.
  */
-public class JavaMailClient implements IEmailClient {
+public class JavaMailSender implements IEmailSender {
     private Session mailSession;
 
-    public JavaMailClient(EmailCredentials emailCredentials) {
+    public JavaMailSender(EmailCredentials emailCredentials) {
         Properties sessionProperties = getSessionPropertiesFrom(emailCredentials);
         Authenticator sessionAuthenticator = getAuthenticatorFrom(emailCredentials);
         mailSession = Session.getInstance(sessionProperties, sessionAuthenticator);

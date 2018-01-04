@@ -1,5 +1,8 @@
 package part1;
 
+import email.Email;
+import email.EmailCredentials;
+
 /**
  * Created by George on 2018-01-03.
  */
