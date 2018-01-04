@@ -7,6 +7,10 @@ import java.util.List;
  */
 public class StringUtils {
     public static String join(List<String> strings, String joinString) {
+        if (strings.isEmpty()) {
+            return "";
+        }
+
         return strings.stream()
                 .reduce("", (string, nextString) -> string + joinString + nextString)
                 .substring(joinString.length());

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Created by George on 2018-01-04.
@@ -55,10 +56,13 @@ public class JavaMailReader implements IEmailReader {
                 emailCredentials.getPassword());
 
         Folder emailFolder = store.getFolder(mailbox);
+        emailFolder.open(Folder.READ_ONLY);
         Message[] messages = emailFolder.getMessages();
+
+        List<Email> emails = convertToEmails(messages);
         emailFolder.close();
 
-        return convertToEmails(messages);
+        return emails;
     }
 
     private List<Email> convertToEmails(Message[] messages) throws Exception {
@@ -69,7 +73,6 @@ public class JavaMailReader implements IEmailReader {
                     .from(convertAddressesToString(message.getFrom())[0])
                     .to(convertAddressesToString(message.getRecipients(Message.RecipientType.TO)))
                     .cc(convertAddressesToString(message.getRecipients(Message.RecipientType.CC)))
-                    .cc(convertAddressesToString(message.getRecipients(Message.RecipientType.BCC)))
                     .subject(message.getSubject())
                     .body(message.getContent().toString());
 
@@ -80,8 +83,16 @@ public class JavaMailReader implements IEmailReader {
     }
 
     private String[] convertAddressesToString(Address[] addresses) {
-        return (String[]) Arrays.stream(addresses)
-                .map(Address::toString)
-                .toArray();
+        if (addresses == null) {
+            return new String[0];
+        }
+
+        String[] rawAddresses = new String[addresses.length];
+
+        for (int i = 0; i < addresses.length; i++) {
+            rawAddresses[i] = addresses[i].toString();
+        }
+
+        return rawAddresses;
     }
 }
