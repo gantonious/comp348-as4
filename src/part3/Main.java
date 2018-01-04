@@ -1,11 +1,8 @@
 package part3;
 
 import email.*;
-import part1.EmailDescriptor;
-import part1.EmailParser;
 
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -50,7 +47,9 @@ public class Main {
 
         printWriter.println("From: " + email.getFromAddress());
         printWriter.println("To: " + StringUtils.join(email.getToAddresses(), ", "));
-        printWriter.println("Cc: " + StringUtils.join(email.getCcAddresses(), ", "));
+        if (!email.getCcAddresses().isEmpty()) {
+            printWriter.println("Cc: " + StringUtils.join(email.getCcAddresses(), ", "));
+        }
         printWriter.println("Subject: " + email.getSubject());
         printWriter.println("------------");
         printWriter.println(email.getBody());

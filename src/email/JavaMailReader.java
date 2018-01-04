@@ -1,11 +1,11 @@
 package email;
 
 import javax.mail.*;
+import javax.mail.search.FlagTerm;
+import javax.mail.search.SearchTerm;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 /**
  * Created by George on 2018-01-04.
@@ -24,9 +24,9 @@ public class JavaMailReader implements IEmailReader {
 
     private Properties getSessionPropertiesFrom(EmailCredentials emailCredentials) {
         Properties sessionProperties = new Properties();
-        sessionProperties.put("mail.pop3.host", emailCredentials.getMailServer());
-        sessionProperties.put("mail.pop3.port", "995");
-        sessionProperties.put("mail.pop3.starttls.enable", "true");
+        sessionProperties.put("mail.store.protocol", "imaps");
+        sessionProperties.put("mail.imaps.host", emailCredentials.getMailServer());
+        sessionProperties.put("mail.imaps.port", "993");
         return sessionProperties;
     }
 
@@ -49,7 +49,7 @@ public class JavaMailReader implements IEmailReader {
     }
 
     private List<Email> tryToGetEmailsFrom(String mailbox) throws Exception {
-        Store store = mailSession.getStore("pop3s");
+        Store store = mailSession.getStore("imaps");
 
         store.connect(emailCredentials.getMailServer(),
                 emailCredentials.getUsername(),
@@ -57,12 +57,16 @@ public class JavaMailReader implements IEmailReader {
 
         Folder emailFolder = store.getFolder(mailbox);
         emailFolder.open(Folder.READ_ONLY);
-        Message[] messages = emailFolder.getMessages();
+        Message[] messages = emailFolder.search(buildUnreadEmailsSearchTerm());
 
         List<Email> emails = convertToEmails(messages);
         emailFolder.close();
 
         return emails;
+    }
+
+    private SearchTerm buildUnreadEmailsSearchTerm() {
+        return new FlagTerm(new Flags(Flags.Flag.SEEN), false);
     }
 
     private List<Email> convertToEmails(Message[] messages) throws Exception {
@@ -74,7 +78,7 @@ public class JavaMailReader implements IEmailReader {
                     .to(convertAddressesToString(message.getRecipients(Message.RecipientType.TO)))
                     .cc(convertAddressesToString(message.getRecipients(Message.RecipientType.CC)))
                     .subject(message.getSubject())
-                    .body(message.getContent().toString());
+                    .body(MessageUtils.getBodyTextFrom(message));
 
             emails.add(email);
         }
