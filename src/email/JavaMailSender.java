@@ -1,9 +1,5 @@
 package email;
 
-import email.Email;
-import email.EmailCredentials;
-import email.IEmailSender;
-
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
