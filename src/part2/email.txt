@@ -1,8 +1,0 @@
-Server: smtp.gmail.com
-User: gaflight95@gmail.com
-Password: none
-To: jessicaa@ualberta.ca, gflight92@gmail.com
-CC:
-BCC:
-Subject: Testing as4
-Body: If you are reading this I am 2/3 done my last assignment
