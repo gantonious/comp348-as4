@@ -29,21 +29,21 @@ all: sources
 
 sources: output
 	@echo "[=====Building Sources=====]"
-	javac -cp $(JAVA_MAIL_JAR) -sourcepath $(SOURCE_PATH) -d $(OUTPUT_PATH) $(PART1_MAIN) $(PART2_MAIN)
+	javac -cp $(JAVA_MAIL_JAR) -sourcepath $(SOURCE_PATH) -d $(OUTPUT_PATH) $(PART1_MAIN) $(PART2_MAIN) $(PART3_MAIN)
 
 output:
 	@echo "[=====Preparing Output Directory=====]"
 	mkdir -p $(OUTPUT_PATH)
 
-runSendEmail:
+runSendEmail: sources
 	@echo "[=====Running Send Email=====]"
 	java -cp $(CLASS_PATH) part1.Main $(EMAIL_FILE)
 
-runSendEmailWithAttachment:
+runSendEmailWithAttachment: sources
 	@echo "[=====Running Send Email with Attachment=====]"
 	java -cp $(CLASS_PATH) part2.Main $(EMAIL_FILE)
 
-runEmailReader:
+runEmailReader: sources
 	@echo "[=====Running Email Reader=====]"
 	java -cp $(CLASS_PATH) part3.Main $(MAIL_SERVER) $(EMAIL_ADDRESS) $(PASSWORD) $(EMAIL_SELECTION)
 
