@@ -12,6 +12,10 @@ Assuming JDK 1.8 is installed on the host machine, both parts can be built by do
 make
 ```
 
+## Additional Documentation
+
+Reflections on the project and final design decisions made can be found in `docs/reflection.pdf`. Research made on the JavaMail API and its findings can be found in `docs/research.pdf`.
+
 ## Part 1: Email Sender
 
 ### Usage
@@ -22,23 +26,15 @@ To send an email do:
 make runSendEmail EMAIL_FILE=[path_to_email_file]
 ```
 
-### Design
-
-Design here.
-
 ## Part 2: Email Sender with Attachment
 
 ### Usage
 
-To send an email with an attachment do:
+To send an email with an attachment do (this sends `banff.jpg` in the root project directory as the attachment):
 
 ```bash
 make runSendEmailWithAttachment EMAIL_FILE=[path_to_email_file]
 ```
-
-### Design
-
-Design here.
 
 ## Part 3: Email Reader
 
@@ -55,7 +51,3 @@ To view a specific email rerun the program with the additional `EMAIL_SELECTION`
 ```bash
 make runSendEmailWithAttachment MAIL_SERVER=[address_of_mail_sever] EMAIL_ADDRESS=[account_address] PASSWORD=[account_password] EMAIL_SELECTION=[selected_email]
 ```
-
-### Design
-
-Design here.
