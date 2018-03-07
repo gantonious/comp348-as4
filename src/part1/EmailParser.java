@@ -84,6 +84,13 @@ public class EmailParser {
 
             return trimmedSplitValues;
         }
-        return new String[0];
+
+        String singleEmailAddress = emailFields.get(field);
+
+        if (singleEmailAddress.trim().isEmpty()) {
+            return new String[0];
+        }
+
+        return new String[] { singleEmailAddress };
     }
 }
