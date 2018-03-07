@@ -30,7 +30,7 @@ public class JavaMailReader implements IEmailReader {
         return sessionProperties;
     }
 
-    private Authenticator getAuthenticatorFrom(EmailCredentials emailCredentials) {
+    private Authenticator getAuthenticatorFrom(final EmailCredentials emailCredentials) {
         return new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
