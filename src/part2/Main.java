@@ -45,7 +45,7 @@ public class Main {
 
         emailDescriptor
                 .getEmail()
-                .attach("./src/part2/banff.jpg")
+                .attach("banff.jpg")
                 .sendUsing(mailSender);
     }
 
