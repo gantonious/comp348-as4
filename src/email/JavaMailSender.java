@@ -27,7 +27,8 @@ public class JavaMailSender implements IEmailSender {
         sessionProperties.put("mail.smtp.host", emailCredentials.getMailServer());
         sessionProperties.put("mail.smtp.auth", "true");
         sessionProperties.put("mail.smtp.port", "465");
-        sessionProperties.put("mail.smtp.starttls.enable", "true");
+        sessionProperties.put("mail.smtp.socketFactory.port", "465");
+        sessionProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         return sessionProperties;
     }
 
