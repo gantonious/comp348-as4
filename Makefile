@@ -5,7 +5,7 @@ else
 endif
 
 PACKAGE_NAME = comp346_as4_3364768
-PACKAGE_CONTENTS = Makefile *.md $(SRC_DIR) $(DOCS_DIR) $(LIBS_PATH)
+PACKAGE_CONTENTS = Makefile *.md $(SOURCE_PATH) $(DOCS_PATH) $(LIBS_PATH)
 
 OUTPUT_PATH = ./out/production/as4
 SOURCE_PATH = ./src
