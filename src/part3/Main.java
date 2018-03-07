@@ -54,7 +54,7 @@ public class Main {
         List<Email> emails = emailReader.getEmailsFrom("Inbox");
 
         if (selection < 1 || selection > emails.size()) {
-            throw new RuntimeException("Bad selection");
+            throw new RuntimeException("You selected an invalid email.");
         }
 
         Email email = emails.get(selection - 1);
@@ -80,6 +80,10 @@ public class Main {
             Email email = emails.get(i);
             String line = String.format("%d. %s (%s)", i + 1, email.getSubject(), email.getFromAddress());
             printWriter.println(line);
+        }
+
+        if (emails.isEmpty()) {
+            printWriter.println("You have no new emails!");
         }
     }
 

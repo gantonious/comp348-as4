@@ -28,7 +28,7 @@ make runSendEmail EMAIL_FILE=[path_to_email_file]
 
 ### Test Plan
 
-To test this part an email file was crafted so that each field was utilized such as the TO, CC, and BCC fields. Then all the specifeid client email boxes were checked and were checked that the visibility of the specified recipients were correct. Tests were also made for the case that the email file leaves some fields blank such as CC.
+To test this part an email file was crafted so that each field was utilized such as the TO, CC, and BCC fields. Then all the specifeid client email boxes were checked and were checked that the visibility of the specified recipients were correct. Tests were also made for the case that the email file leaves some fields blank such as CC. When testing `smtp.gmail.com` was used as the mail server.
 
 ## Part 2: Email Sender with Attachment
 
@@ -42,7 +42,7 @@ make runSendEmailWithAttachment EMAIL_FILE=[path_to_email_file]
 
 ## Test Plan
 
-This part extends the existing functionality of part 1 and only attaches a predefined attachment to the email. To test this part sufficiently all that I did was send an email and ensure the recipient received the attached attachment as expected.
+This part extends the existing functionality of part 1 and only attaches a predefined attachment to the email. To test this part sufficiently all that I did was send an email and ensure the recipient received the attached attachment as expected. When testing `smtp.gmail.com` was used as the mail server.
 
 ## Part 3: Email Reader
 
@@ -51,18 +51,18 @@ This part extends the existing functionality of part 1 and only attaches a prede
 To view all of your unread emails do:
 
 ```bash
-make runSendEmailWithAttachment MAIL_SERVER=[address_of_mail_sever] EMAIL_ADDRESS=[account_address] PASSWORD=[account_password]
+make runEmailReader MAIL_SERVER=[address_of_mail_sever] EMAIL_ADDRESS=[account_address] PASSWORD=[account_password]
 ```
 
 To view a specific email rerun the program with the additional `EMAIL_SELECTION` parameter as shown below:
 
 ```bash
-make runSendEmailWithAttachment MAIL_SERVER=[address_of_mail_sever] EMAIL_ADDRESS=[account_address] PASSWORD=[account_password] EMAIL_SELECTION=[selected_email]
+make runEmailReader MAIL_SERVER=[address_of_mail_sever] EMAIL_ADDRESS=[account_address] PASSWORD=[account_password] EMAIL_SELECTION=[selected_email]
 ```
 
 ### Test Plan
 
-Four different cases were tested for this part:
+Four different cases were tested for this part. These tests used `imap.gmail.com` as the mail server:
 - Checking for emails when a user has no unread emails
 - Checking for emails when the user does have unread emails
 - Selecting a valid email from the list
